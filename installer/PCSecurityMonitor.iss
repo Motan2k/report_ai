@@ -80,4 +80,4 @@ Filename: "{app}\README.md"; Description: "View the README"; Flags: postinstall 
 ; already be gone, or may never have been registered).
 Filename: "powershell.exe"; \
     Parameters: "-NoProfile -ExecutionPolicy Bypass -Command ""Unregister-ScheduledTask -TaskName '{#MyTaskName}' -Confirm:$false -ErrorAction SilentlyContinue"""; \
-    Flags: runhidden waituntilterminated
+    RunOnceId: "RemoveScheduledTask"; Flags: runhidden waituntilterminated
