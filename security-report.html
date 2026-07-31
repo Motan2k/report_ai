@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PC Security Report — WIN-JN6H1VLB761</title>
+<style>
+  :root {
+    --ok: #1a7f37; --ok-bg: #dafbe1;
+    --warn: #9a6700; --warn-bg: #fff8c5;
+    --risk: #cf222e; --risk-bg: #ffebe9;
+    --border: #d0d7de; --muted: #57606a; --bg: #f6f8fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: var(--bg); color: #1f2328; margin: 0; padding: 32px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
+  h1 { font-size: 20px; margin: 0; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .status-banner {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok);
+    border-radius: 8px; padding: 14px 18px; font-weight: 600; margin-bottom: 24px;
+  }
+  .card {
+    background: #fff; border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 20px; margin-bottom: 16px;
+  }
+  .card h2 { font-size: 15px; margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px; }
+  .badge {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px;
+    border-radius: 999px; text-transform: uppercase; letter-spacing: .3px;
+  }
+  .badge.ok { background: var(--ok-bg); color: var(--ok); }
+  .badge.warn { background: var(--warn-bg); color: var(--warn); }
+  .badge.risk { background: var(--risk-bg); color: var(--risk); }
+  .row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #eef1f4; font-size: 13.5px; }
+  .row:last-child { border-bottom: none; }
+  .row span:first-child { color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eef1f4; }
+  th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; }
+  ol { font-size: 13.5px; padding-left: 20px; }
+  ol li { padding: 4px 0; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .note { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+  footer { font-size: 12px; color: var(--muted); text-align: center; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>PC Security Report</h1>
+    <span class="meta">WIN-JN6H1VLB761 · analysis: Jul 31, 2026, 08:00</span>
+  </header>
+
+  <div class="status-banner">✓ OK — nothing abnormal detected</div>
+
+  <div class="card">
+    <h2>Windows Update <span class="badge ok">1 pending</span></h2>
+    <div class="row"><span>Pending updates</span><span>1</span></div>
+    <div class="row"><span>Detail</span><span>KB2267602 (Defender Security Intelligence Update) — routine signature build bump (1.455.433.0 → 1.455.434.0). Same recurring item as prior checks, no new updates queued.</span></div>
+    <div class="row"><span>Critical/Important OS updates left uninstalled for days</span><span>None</span></div>
+    <div class="note">No action needed. This is a self-clearing Defender signature update, not a stuck OS patch.</div>
+  </div>
+
+  <div class="card">
+    <h2>Windows Defender <span class="badge ok">ok</span></h2>
+    <div class="row"><span>Real-time protection</span><span>Enabled</span></div>
+    <div class="row"><span>Antivirus / Antispyware</span><span>Enabled</span></div>
+    <div class="row"><span>Signature age</span><span>0 days</span></div>
+    <div class="row"><span>Last quick scan</span><span>Jul 24, 2026 (~7 days ago)</span></div>
+    <div class="row"><span>Last full scan</span><span>Never run</span></div>
+    <div class="note">Unchanged since the 06:00 check. Missing full scan is just a reminder, not a risk — signatures are current and real-time protection is active.</div>
+  </div>
+
+  <div class="card">
+    <h2>Services &amp; processes <span class="badge ok">ok</span></h2>
+    <div class="row"><span>Running processes</span><span>98 (98 at 06:00)</span></div>
+    <div class="row"><span>Services flagged for review</span><span>8</span></div>
+    <div class="note">Same 8 legitimate OEM/utility services as last check (AnyDesk, 4× Dell services, Foxit Update, Steam Client Service, 2× MiniTool ShadowMaker) — no changes, no suspicious names or paths, none running from temp/Downloads/AppData. Process list shifted only in the usual transient way: <strong>smartscreen.exe</strong> (C:\Windows\System32, signed Microsoft Corporation) is now running and <strong>backgroundTaskHost.exe</strong> has exited — both normal Windows background activity, not a concern. No new startup items — identical set to the last two checks.</div>
+  </div>
+
+  <div class="card">
+    <h2>Available app updates <span class="badge warn">16</span></h2>
+    <details>
+      <summary>See full list</summary>
+      <table>
+        <tr><th>App</th><th>Current</th><th>Available</th></tr>
+        <tr><td>Google Chrome</td><td>150.0.7871.187</td><td>151.0.7922.72</td></tr>
+        <tr><td>Foxit PDF Reader</td><td>2025.3.0.35737</td><td>2026.1.2.36540</td></tr>
+        <tr><td>7-Zip</td><td>25.01</td><td>26.02</td></tr>
+        <tr><td>AnyDesk</td><td>9.6.7</td><td>9.7.12</td></tr>
+        <tr><td>Opera Stable</td><td>133.0.5932.85</td><td>134.0.5954.26</td></tr>
+        <tr><td>Dell Command | Update</td><td>5.6.0</td><td>5.7.0</td></tr>
+        <tr><td>Git</td><td>2.53.0</td><td>2.55.0</td></tr>
+        <tr><td>GitHub Desktop</td><td>3.5.11</td><td>3.6.3</td></tr>
+        <tr><td>VC++ Redist x86/x64</td><td>14.44 / 14.50</td><td>14.51</td></tr>
+        <tr><td>.NET Desktop Runtime 8/9/10</td><td>—</td><td>newer versions available</td></tr>
+        <tr><td>PowerShell</td><td>7.6.2</td><td>7.6.4</td></tr>
+        <tr><td>Windows Terminal</td><td>1.18</td><td>1.24</td></tr>
+        <tr><td>WindowsAppRuntime.1.7</td><td>1.7.3</td><td>1.7.9</td></tr>
+      </table>
+    </details>
+    <div class="note">Identical list to the 06:00 check — no new apps, no versions cleared. No known actively-exploited vulnerabilities identified among these.</div>
+  </div>
+
+  <div class="card">
+    <h2>AI Recommendations</h2>
+    <ol>
+      <li>Update <strong>Google Chrome</strong> and <strong>Foxit PDF Reader</strong> first — the most internet-exposed apps still lagging behind.</li>
+      <li><strong>AnyDesk</strong> (remote access tool, auto-starts as a service) is still one version behind. Update it, and confirm its auto-start is intentional if you don't use it for regular remote support.</li>
+      <li>The rest (7-Zip, Opera, Git, GitHub Desktop, PowerShell, Windows Terminal, VC++ Redist, .NET runtimes, Dell Command Update, WindowsAppRuntime) can wait for the normal update cycle — not urgent.</li>
+      <li>Optional: run a full Defender scan — only quick scans have been run so far, and the last one was ~7 days ago. Signatures are current, so this is a good-practice item, not urgent.</li>
+    </ol>
+  </div>
+
+  <div class="note" style="margin-top:4px;">Analysis based on scan data from Jul 31, 2026, 08:00 (local) · compared against the previous available report (Jul 31, 2026, 06:00).</div>
+
+  <footer>Auto-generated every 2 hours by the Cowork security agent · Jul 31, 2026, 08:00</footer>
+</div>
+</body>
+</html>
