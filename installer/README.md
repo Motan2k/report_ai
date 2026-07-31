@@ -59,4 +59,4 @@ This has to be done on Windows (Inno Setup itself is a Windows tool).
 - If you rename the install folder away from the SOP-documented
   `C:\Users\<you>\report_ai` path, update
   `PC-Security-Monitoring-SOP.docx` accordingly, since it references that
-  path directly.
+  path directly..
