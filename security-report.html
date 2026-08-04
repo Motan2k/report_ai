@@ -15,13 +15,13 @@
     font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     background: var(--bg); color: #1f2328; margin: 0; padding: 32px;
   }
-  .wrap { max-width: 860px; margin: 0 auto; }
+  .wrap { max-width: 900px; margin: 0 auto; }
   header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
   h1 { font-size: 20px; margin: 0; }
   .meta { color: var(--muted); font-size: 13px; }
   .status-banner {
     display: flex; align-items: center; gap: 10px;
-    background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok);
+    background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn);
     border-radius: 8px; padding: 14px 18px; font-weight: 600; margin-bottom: 24px;
   }
   .card {
@@ -40,11 +40,11 @@
   .row:last-child { border-bottom: none; }
   .row span:first-child { color: var(--muted); }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eef1f4; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
   th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; }
   ol { font-size: 13.5px; padding-left: 20px; }
   ol li { padding: 4px 0; }
-  details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 4px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin: 4px 0; font-weight: 600; }
   .note { font-size: 12.5px; color: var(--muted); margin-top: 8px; }
   footer { font-size: 12px; color: var(--muted); text-align: center; margin-top: 28px; }
 </style>
@@ -54,73 +54,166 @@
 
   <header>
     <h1>PC Security Report</h1>
-    <span class="meta">WIN-JN6H1VLB761 · analysis: Jul 31, 2026, 08:00</span>
+    <span class="meta">WIN-JN6H1VLB761 · analysis: Aug 3, 2026, 16:44</span>
   </header>
 
-  <div class="status-banner">✓ OK — nothing abnormal detected</div>
+  <div class="status-banner">⚠ Needs attention — main account has no password requirement, BitLocker is off</div>
 
   <div class="card">
-    <h2>Windows Update <span class="badge ok">1 pending</span></h2>
-    <div class="row"><span>Pending updates</span><span>1</span></div>
-    <div class="row"><span>Detail</span><span>KB2267602 (Defender Security Intelligence Update) — routine signature build bump (1.455.433.0 → 1.455.434.0). Same recurring item as prior checks, no new updates queued.</span></div>
-    <div class="row"><span>Critical/Important OS updates left uninstalled for days</span><span>None</span></div>
-    <div class="note">No action needed. This is a self-clearing Defender signature update, not a stuck OS patch.</div>
+    <h2>System info</h2>
+    <div class="row"><span>OS</span><span>Microsoft Windows 11 Pro (build 26200)</span></div>
+    <div class="row"><span>Make / model</span><span>Dell Inc. Precision 3280 Compact</span></div>
+    <div class="row"><span>Last boot</span><span>Jul 15, 2026, 17:33</span></div>
+    <div class="row"><span>Uptime</span><span>18d 23h 10m</span></div>
+    <div class="note">Nearly 19 days without a reboot. Not a security issue by itself, but note two pending updates below (Intel drivers) typically apply cleanly only after a restart.</div>
+  </div>
+
+  <div class="card">
+    <h2>Windows Update <span class="badge ok">no critical/important pending</span></h2>
+    <div class="row"><span>Pending updates</span><span>3</span></div>
+    <table>
+      <tr><th>Title</th><th>Severity</th><th>KB</th><th>Security?</th></tr>
+      <tr><td>Security Intelligence Update for Microsoft Defender Antivirus (KB2267602)</td><td>Unspecified</td><td><a href="https://www.catalog.update.microsoft.com/Search.aspx?q=KB2267602" target="_blank" rel="noopener">2267602</a></td><td>Yes (routine signature update)</td></tr>
+      <tr><td>Intel System Driver Update (2603.9.4.0)</td><td>Unspecified</td><td>—</td><td>No</td></tr>
+      <tr><td>Intel SoftwareComponent Driver Update (267.102.85.0)</td><td>Unspecified</td><td>—</td><td>No</td></tr>
+    </table>
+    <div class="note">No action needed urgently. None are Critical/Important OS security patches — the Defender item updates itself automatically, and the two Intel driver updates are optional, safe to install at your convenience (ideally paired with a reboot given the 19-day uptime).</div>
   </div>
 
   <div class="card">
     <h2>Windows Defender <span class="badge ok">ok</span></h2>
     <div class="row"><span>Real-time protection</span><span>Enabled</span></div>
-    <div class="row"><span>Antivirus / Antispyware</span><span>Enabled</span></div>
+    <div class="row"><span>Antivirus / Antispyware</span><span>Enabled / Enabled</span></div>
+    <div class="row"><span>Network Inspection System</span><span>Enabled</span></div>
     <div class="row"><span>Signature age</span><span>0 days</span></div>
-    <div class="row"><span>Last quick scan</span><span>Jul 24, 2026 (~7 days ago)</span></div>
+    <div class="row"><span>Last quick scan</span><span>Aug 3, 2026, 15:59</span></div>
     <div class="row"><span>Last full scan</span><span>Never run</span></div>
-    <div class="note">Unchanged since the 06:00 check. Missing full scan is just a reminder, not a risk — signatures are current and real-time protection is active.</div>
+    <div class="note">All protection flags on, signatures current. Full scan still hasn't been run since monitoring began (Jul 23) — a standing reminder, not urgent given real-time protection is active.</div>
+  </div>
+
+  <div class="card">
+    <h2>Windows Firewall <span class="badge ok">all profiles enabled</span></h2>
+    <table>
+      <tr><th>Profile</th><th>State</th><th>Inbound default</th><th>Outbound default</th></tr>
+      <tr><td>Domain</td><td>Enabled</td><td>Not configured (Windows default: block unsolicited)</td><td>Not configured (Windows default: allow)</td></tr>
+      <tr><td>Private</td><td>Enabled</td><td>Not configured (Windows default: block unsolicited)</td><td>Not configured (Windows default: allow)</td></tr>
+      <tr><td>Public</td><td>Enabled</td><td>Not configured (Windows default: block unsolicited)</td><td>Not configured (Windows default: allow)</td></tr>
+    </table>
+    <div class="note">All three firewall profiles are on — good baseline. Default actions are "not configured," meaning Windows falls back to its standard behavior (block unsolicited inbound, allow outbound), which is normal and fine for most setups.</div>
+  </div>
+
+  <div class="card">
+    <h2>BitLocker disk encryption <span class="badge warn">off</span></h2>
+    <table>
+      <tr><th>Drive</th><th>Status</th><th>Protection</th><th>Encrypted</th></tr>
+      <tr><td>C:</td><td>Fully decrypted</td><td>Off</td><td>0%</td></tr>
+    </table>
+    <div class="note">The system drive is not encrypted. This machine is a Dell Precision 3280 (a compact desktop workstation, not a laptop), which lowers the urgency compared to a portable device, but BitLocker is still worth turning on if the PC ever leaves a secured location or handles sensitive data — Windows 11 Pro supports it natively (Settings &gt; Privacy &amp; security &gt; Device encryption, or "Manage BitLocker").</div>
+  </div>
+
+  <div class="card">
+    <h2>Local user accounts <span class="badge warn">1 to review</span></h2>
+    <table>
+      <tr><th>Account</th><th>State</th><th>Password required</th><th>Last logon</th></tr>
+      <tr><td>Administrator (built-in)</td><td><span class="badge ok">Disabled</span></td><td>Yes</td><td>Mar 22, 2025</td></tr>
+      <tr><td>DefaultAccount</td><td><span class="badge ok">Disabled</span></td><td>No</td><td>Never</td></tr>
+      <tr><td>Guest</td><td><span class="badge ok">Disabled</span></td><td>No</td><td>Never</td></tr>
+      <tr><td>TutuFruti (your account)</td><td><span class="badge warn">Enabled</span></td><td><strong style="color:var(--warn);">No</strong></td><td>Jul 31, 2026</td></tr>
+      <tr><td>WDAGUtilityAccount</td><td><span class="badge ok">Disabled</span></td><td>Yes</td><td>Never</td></tr>
+    </table>
+    <div class="note"><strong>Worth checking:</strong> your main account (TutuFruti) is flagged with "password not required" at the Windows account level. This doesn't necessarily mean it's unprotected right now — it may be using Windows Hello (PIN/face/fingerprint) instead of a traditional password — but it does mean the account is technically allowed to have a blank password. Worth a quick check in Settings &gt; Accounts &gt; Sign-in options to confirm a real credential is set. The built-in Administrator and Guest accounts are both disabled, which is correct hardening.</div>
   </div>
 
   <div class="card">
     <h2>Services &amp; processes <span class="badge ok">ok</span></h2>
-    <div class="row"><span>Running processes</span><span>98 (98 at 06:00)</span></div>
-    <div class="row"><span>Services flagged for review</span><span>8</span></div>
-    <div class="note">Same 8 legitimate OEM/utility services as last check (AnyDesk, 4× Dell services, Foxit Update, Steam Client Service, 2× MiniTool ShadowMaker) — no changes, no suspicious names or paths, none running from temp/Downloads/AppData. Process list shifted only in the usual transient way: <strong>smartscreen.exe</strong> (C:\Windows\System32, signed Microsoft Corporation) is now running and <strong>backgroundTaskHost.exe</strong> has exited — both normal Windows background activity, not a concern. No new startup items — identical set to the last two checks.</div>
+    <div class="row"><span>Running processes</span><span>98</span></div>
+    <div class="row"><span>Non-Microsoft services flagged for review</span><span>8</span></div>
+    <div class="row"><span>Processes with no publisher info</span><span>8</span></div>
+    <details>
+      <summary>Non-Microsoft running services (8)</summary>
+      <table>
+        <tr><th>Service</th><th>Display name</th><th>Start mode</th></tr>
+        <tr><td>AnyDesk</td><td>AnyDesk Service</td><td>Auto</td></tr>
+        <tr><td>DellClientManagementService</td><td>Dell Client Management Service</td><td>Auto</td></tr>
+        <tr><td>DellTechHub</td><td>Dell TechHub</td><td>Auto</td></tr>
+        <tr><td>DPMService</td><td>Dell Peripheral Manager Service</td><td>Auto</td></tr>
+        <tr><td>FoxitReaderUpdateService</td><td>Foxit PDF Reader Update Service</td><td>Auto</td></tr>
+        <tr><td>Steam Client Service</td><td>Steam Client Service</td><td>Manual</td></tr>
+        <tr><td>SupportAssistAgent</td><td>Dell SupportAssist</td><td>Auto</td></tr>
+        <tr><td>MTAgentService / MTSchedulerService</td><td>MiniTool ShadowMaker</td><td>Auto</td></tr>
+      </table>
+    </details>
+    <details>
+      <summary>Processes with no publisher info (8)</summary>
+      <table>
+        <tr><th>Name</th><th>PID</th><th>Path</th></tr>
+        <tr><td>AgentService</td><td>14412</td><td>MiniTool ShadowMaker</td></tr>
+        <tr><td>cowork-svc</td><td>31772</td><td>Anthropic Claude app (Cowork's own helper process)</td></tr>
+        <tr><td>Dell.TechHub.Diagnostics.SubAgent</td><td>10652</td><td>Dell DTP</td></tr>
+        <tr><td>Dell.Update.SubAgent</td><td>10616</td><td>Dell Update Service</td></tr>
+        <tr><td>DPMCrashHandler</td><td>6672</td><td>Dell Peripheral Manager</td></tr>
+        <tr><td>SchedulerService</td><td>14208</td><td>MiniTool ShadowMaker</td></tr>
+        <tr><td>ServiceShell</td><td>7256</td><td>Dell Update Service</td></tr>
+        <tr><td>WidgetService</td><td>10376</td><td>Windows Widgets (Microsoft, just missing metadata)</td></tr>
+      </table>
+    </details>
+    <div class="note">All 8 flagged services and all 8 unsigned processes are the same recurring set seen in every prior check — Dell OEM tooling, MiniTool ShadowMaker backup software, AnyDesk, Steam, Foxit, and Cowork's/Windows' own helper processes. No typosquatting, nothing running from temp/Downloads/AppData as a service, nothing new since the last snapshot.</div>
   </div>
 
   <div class="card">
-    <h2>Available app updates <span class="badge warn">16</span></h2>
+    <h2>Startup programs</h2>
+    <table>
+      <tr><th>Name</th><th>User</th></tr>
+      <tr><td>OneDriveSetup (×2, system accounts)</td><td>LOCAL SERVICE / NETWORK SERVICE</td></tr>
+      <tr><td>OneDrive</td><td>TutuFruti</td></tr>
+      <tr><td>Steam</td><td>TutuFruti</td></tr>
+      <tr><td>Microsoft Edge auto-launch</td><td>TutuFruti</td></tr>
+      <tr><td>SecurityHealth (Windows Security tray icon)</td><td>Public</td></tr>
+      <tr><td>RtkAudUService (Realtek audio)</td><td>Public</td></tr>
+      <tr><td>WavesSvc (Waves audio)</td><td>Public</td></tr>
+    </table>
+    <div class="note">8 entries, unchanged from the previous check — no new or unrecognized startup programs.</div>
+  </div>
+
+  <div class="card">
+    <h2>Available app updates <span class="badge warn">15</span></h2>
     <details>
       <summary>See full list</summary>
       <table>
         <tr><th>App</th><th>Current</th><th>Available</th></tr>
-        <tr><td>Google Chrome</td><td>150.0.7871.187</td><td>151.0.7922.72</td></tr>
-        <tr><td>Foxit PDF Reader</td><td>2025.3.0.35737</td><td>2026.1.2.36540</td></tr>
         <tr><td>7-Zip</td><td>25.01</td><td>26.02</td></tr>
         <tr><td>AnyDesk</td><td>9.6.7</td><td>9.7.12</td></tr>
-        <tr><td>Opera Stable</td><td>133.0.5932.85</td><td>134.0.5954.26</td></tr>
         <tr><td>Dell Command | Update</td><td>5.6.0</td><td>5.7.0</td></tr>
-        <tr><td>Git</td><td>2.53.0</td><td>2.55.0</td></tr>
-        <tr><td>GitHub Desktop</td><td>3.5.11</td><td>3.6.3</td></tr>
-        <tr><td>VC++ Redist x86/x64</td><td>14.44 / 14.50</td><td>14.51</td></tr>
-        <tr><td>.NET Desktop Runtime 8/9/10</td><td>—</td><td>newer versions available</td></tr>
-        <tr><td>PowerShell</td><td>7.6.2</td><td>7.6.4</td></tr>
-        <tr><td>Windows Terminal</td><td>1.18</td><td>1.24</td></tr>
+        <tr><td>Foxit PDF Reader</td><td>2025.3.0.35737</td><td>2026.1.2.36540</td></tr>
+        <tr><td>Git</td><td>2.53.0.0.7</td><td>2.55.0.0.3</td></tr>
+        <tr><td>Google Chrome</td><td>150.0.7871.187</td><td>151.0.7922.72</td></tr>
+        <tr><td>VC++ Redist (x86)</td><td>14.44.35211.0</td><td>14.51.36247.0</td></tr>
+        <tr><td>VC++ Redist (x64)</td><td>14.50.35710.0</td><td>14.51.36247.0</td></tr>
+        <tr><td>.NET Desktop Runtime 8.0</td><td>8.0.22</td><td>8.0.29</td></tr>
+        <tr><td>.NET Desktop Runtime 9.0</td><td>9.0.7</td><td>9.0.18</td></tr>
+        <tr><td>.NET Desktop Runtime 10.0</td><td>10.0.1</td><td>10.0.10</td></tr>
+        <tr><td>Opera Stable</td><td>133.0.5932.85</td><td>134.0.5954.26</td></tr>
+        <tr><td>PowerShell</td><td>7.6.2.0</td><td>7.6.4.0</td></tr>
+        <tr><td>Windows Terminal</td><td>1.18.10301.0</td><td>1.24.11911.0</td></tr>
         <tr><td>WindowsAppRuntime.1.7</td><td>1.7.3</td><td>1.7.9</td></tr>
       </table>
     </details>
-    <div class="note">Identical list to the 06:00 check — no new apps, no versions cleared. No known actively-exploited vulnerabilities identified among these.</div>
+    <div class="note">AnyDesk has now been outdated for ~11 days since monitoring began (Jul 23) — still the top priority since it's internet-facing remote-access software. Chrome is the other app worth not falling too far behind on. The rest is routine maintenance.</div>
   </div>
 
   <div class="card">
     <h2>AI Recommendations</h2>
     <ol>
-      <li>Update <strong>Google Chrome</strong> and <strong>Foxit PDF Reader</strong> first — the most internet-exposed apps still lagging behind.</li>
-      <li><strong>AnyDesk</strong> (remote access tool, auto-starts as a service) is still one version behind. Update it, and confirm its auto-start is intentional if you don't use it for regular remote support.</li>
-      <li>The rest (7-Zip, Opera, Git, GitHub Desktop, PowerShell, Windows Terminal, VC++ Redist, .NET runtimes, Dell Command Update, WindowsAppRuntime) can wait for the normal update cycle — not urgent.</li>
-      <li>Optional: run a full Defender scan — only quick scans have been run so far, and the last one was ~7 days ago. Signatures are current, so this is a good-practice item, not urgent.</li>
+      <li><strong>Verify the sign-in credential on your account (TutuFruti).</strong> It's flagged as not requiring a password at the Windows account level. If you're using a PIN or biometric sign-in this may be expected, but confirm a real credential is set (Settings &gt; Accounts &gt; Sign-in options) — an account that truly has no password is a real exposure on a shared or portable machine.</li>
+      <li><strong>Update AnyDesk</strong> — ~11 days outdated now and it's remote-access software exposed to the internet.</li>
+      <li>Consider turning on BitLocker for drive C: — lower urgency since this is a desktop workstation, not a laptop, but still good practice if the machine ever changes hands or location.</li>
+      <li>Install the 2 pending Intel driver updates and the Defender signature update, ideally with a reboot (19 days of uptime).</li>
+      <li>Update Chrome when convenient; the rest of the 15-app backlog can wait for the normal cycle.</li>
+      <li>Optional: run a full Defender scan — none has been recorded since monitoring started.</li>
     </ol>
   </div>
 
-  <div class="note" style="margin-top:4px;">Analysis based on scan data from Jul 31, 2026, 08:00 (local) · compared against the previous available report (Jul 31, 2026, 06:00).</div>
-
-  <footer>Auto-generated every 2 hours by the Cowork security agent · Jul 31, 2026, 08:00</footer>
+  <footer>Generated by the Cowork security agent · Aug 3, 2026, 16:44</footer>
 </div>
 </body>
 </html>

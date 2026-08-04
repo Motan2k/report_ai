@@ -12,6 +12,24 @@ if (-not (Test-Path $HistoryPath)) { New-Item -ItemType Directory -Path $History
 
 Write-Host "Collecting data... may take 1-2 minutes (winget is checking for updates)."
 
+# 0. System info
+$sysInfo = $null
+try {
+    $os = Get-CimInstance Win32_OperatingSystem
+    $cs = Get-CimInstance Win32_ComputerSystem
+    $bootTime = $os.LastBootUpTime
+    $uptime = (Get-Date) - $bootTime
+    $sysInfo = [PSCustomObject]@{
+        OsName       = $os.Caption
+        OsVersion    = $os.Version
+        OsBuild      = $os.BuildNumber
+        Manufacturer = $cs.Manufacturer
+        Model        = $cs.Model
+        LastBoot     = $bootTime
+        UptimeText   = "{0}d {1}h {2}m" -f $uptime.Days, $uptime.Hours, $uptime.Minutes
+    }
+} catch {}
+
 # 1. Windows Update - uninstalled updates
 $pendingUpdates = @()
 try {
@@ -77,17 +95,48 @@ try {
     } | Select-Object Name, DisplayName, PathName, StartMode
 } catch {}
 
+# 7. Windows Firewall status (per profile)
+$firewallProfiles = @()
+try {
+    $firewallProfiles = Get-NetFirewallProfile | Select-Object Name, Enabled, DefaultInboundAction, DefaultOutboundAction
+} catch {}
+
+# 8. BitLocker disk encryption (best effort - usually needs admin/Pro-Enterprise)
+$bitlockerVolumes = @()
+try {
+    $bitlockerVolumes = Get-BitLockerVolume | Select-Object MountPoint, VolumeStatus, ProtectionStatus, EncryptionPercentage
+} catch {}
+
+# 9. Local user accounts (flag enabled built-in accounts, passwordless accounts)
+$localAccounts = @()
+try {
+    $localAccounts = Get-LocalUser | Select-Object Name, Enabled, PasswordRequired, PasswordLastSet, LastLogon
+} catch {}
+
+# 10. Processes with no publisher/company info (not proof of anything, but worth a look)
+$unsignedProcesses = @()
+try {
+    $unsignedProcesses = $processes | Where-Object {
+        [string]::IsNullOrWhiteSpace($_.Company) -and $_.Path -notmatch "^C:\\WINDOWS\\"
+    }
+} catch {}
+
 $report = [PSCustomObject]@{
     Timestamp           = (Get-Date).ToString("o")
     ComputerName        = $env:COMPUTERNAME
+    SystemInfo          = $sysInfo
     PendingUpdatesCount = $pendingUpdates.Count
     PendingUpdates      = $pendingUpdates
     Defender            = $defender
+    FirewallProfiles    = $firewallProfiles
+    BitLockerVolumes    = $bitlockerVolumes
+    LocalAccounts       = $localAccounts
     AppUpgrades         = $appUpgrades
     StartupItems        = $startupItems
     SuspiciousServices  = $suspiciousServices
     ProcessCount        = $processes.Count
     Processes           = $processes
+    UnsignedProcesses   = $unsignedProcesses
 }
 
 $json = $report | ConvertTo-Json -Depth 6

@@ -17,12 +17,6 @@ The result is saved to `latest.json` (always overwritten) plus a historical copy
 
 ## One-time setup — scheduling it every 2 hours
 
-**Option A — installer.** Build `installer/PCSecurityMonitor.iss` into a
-`.exe` with Inno Setup (see `installer/README.md`) and run it; it copies the
-scripts and registers the scheduled task for you.
-
-**Option B — manual:**
-
 1. Open **PowerShell as Administrator** (right-click the PowerShell icon → "Run as Administrator").
 2. Run:
    ```powershell
